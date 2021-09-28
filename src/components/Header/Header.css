@@ -1,0 +1,12 @@
+.header-container{
+    display: flex;
+}
+
+.shaded{
+    background-color: rgba(200, 200, 200);
+    
+}
+
+.header-text{
+    margin: 8px;
+}

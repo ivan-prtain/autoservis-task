@@ -1,36 +1,7 @@
 import React from 'react'
 import Button from '../Button'
-import { useState } from 'react'
 
-const Korak1 = () => {
-
-    const [isTypeChosen, setTypeChosen] = useState(true)
-
-    const onClick = () => {
-        console.log('kliknuo sam');
-        if (validate()) {
-            console.log('mozete dalje')
-            setTypeChosen(false);
-        }
-        else {
-            console.log('odlucio')
-            alert('Molim vas odaberite prvo proizvođača')
-        }
-    }
-
-    const validate = () => {
-        console.log('poceo validaciju')
-        let inputInfo = document.radioForm.manufacturer;
-        let radioIsChecked = false;
-
-        inputInfo.forEach(element => {
-            if (element.checked === true) {
-                radioIsChecked = true;
-                return true;
-            }
-        });
-        return radioIsChecked;
-    }
+const Korak1 = ({ functionality }) => {
 
 
 
@@ -40,7 +11,7 @@ const Korak1 = () => {
             <div>
                 Korak 1. Odaberite proizvođača vašeg vozila
             </div>
-            <form name='radioForm'>
+            <form style={{ height: '10rem' }} name='radioForm'>
                 <input type='radio' id='Peugeot' value='Peugeot' name='manufacturer' />
                 <label htmlFor="Peugeot">Peugeot</label>
                 <input type='radio' id='Volkswagen' value='Volkswagen' name='manufacturer' />
@@ -66,7 +37,7 @@ const Korak1 = () => {
             </form>
             <hr />
 
-            <Button text='dalje' functionality={onClick} />
+            <Button text='dalje' functionality={functionality} />
 
         </div>
     )

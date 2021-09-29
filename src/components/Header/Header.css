@@ -2,9 +2,8 @@
     display: flex;
 }
 
-.shaded{
-    background-color: rgba(200, 200, 200);
-    
+.gray-veil{
+    opacity: 0.4;
 }
 
 .header-text{

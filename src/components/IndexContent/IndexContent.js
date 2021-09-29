@@ -1,11 +1,11 @@
 import React from 'react'
 
-const IndexContent = ({ functionality }) => {
+const IndexContent = ({ functionality, directStyle }) => {
     return (
-        <div>
+        <div style={{ opacity: directStyle }}>
 
             <div>Pritisnite gumb niže kako biste pokrenuli</div>
-            <button onClick={functionality}>Pokreni konfigurator</button>
+            <button style={{ marginTop: '60px' }} onClick={functionality}>Pokreni konfigurator</button>
 
         </div>
     )

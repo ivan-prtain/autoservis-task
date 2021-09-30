@@ -8,10 +8,6 @@ const Kupon = ({ applyCoupon }) => {
         setKupon(true)
     }
 
-    const handleSubmit = event => {
-        event.preventDefault();
-    }
-
     return (
         <div>
 

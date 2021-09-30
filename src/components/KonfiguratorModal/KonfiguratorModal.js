@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { validate, saveCarManufacturer } from '../Koraci/Korak1Functions';
 import Korak3 from '../Koraci/Korak3';
+import Korak4 from '../Koraci/Korak4';
 
 
 const KonfiguratorModal = ({ functionality }) => {
@@ -13,6 +14,13 @@ const KonfiguratorModal = ({ functionality }) => {
     const [korak1, setKorak1] = useState(true);
     const [korak2, setKorak2] = useState(false);
     const [korak3, setKorak3] = useState(false);
+    const [korak4, setKorak4] = useState(false);
+    const [totalPrice, setTotalPrice] = useState('');
+    const [chosenCar, setChosenCar] = useState('');
+
+
+
+
 
     const nextStep1 = () => {
         console.log('kliknuo sam');
@@ -52,7 +60,6 @@ const KonfiguratorModal = ({ functionality }) => {
     }
 
     const previousStep2 = () => {
-        console.log('click');
         setKorak2(false);
         setKorak1(true);
     }
@@ -78,8 +85,22 @@ const KonfiguratorModal = ({ functionality }) => {
                 personalData.push(forma[i].value)
             }
             sessionStorage.setItem('personalData', personalData);
+
+            setKorak3(false);
+            setKorak4(true);
         }
     }
+
+    const previousStep3 = () => {
+        setKorak3(false);
+        setKorak2(true);
+    }
+
+    const report = () => {
+        console.log('ono sto je poslano')
+        console.log(chosenCar)
+    }
+
 
     return (
         <Router>
@@ -87,9 +108,23 @@ const KonfiguratorModal = ({ functionality }) => {
                 <div className='modal-container'>
                     <button onClick={functionality}>X</button>
                     <h3>Konfigurator servisa</h3>
-                    {korak1 && < Korak1 functionality={nextStep1} />}
-                    {korak2 && < Korak2 nextStep={nextStep2} previousStep={previousStep2} />}
-                    {korak3 && <Korak3 nextStep={nextStep3} />}
+                    < Korak1
+                        functionality={nextStep1}
+                        visibility={korak1 ? '' : 'none'}
+                        sendState={chosenCar => setChosenCar(chosenCar)}
+                    />
+
+                    < Korak2
+                        nextStep={nextStep2}
+                        sendState={totalPrice => setTotalPrice(totalPrice)}
+                        previousStep={previousStep2}
+                        visibility={korak2 ? '' : 'none'} />
+                    < Korak3
+                        nextStep={nextStep3}
+                        previousStep={previousStep3}
+                        visibility={korak3 ? '' : 'none'} />
+                    < Korak4 visibility={korak4 ? '' : 'none'} />
+
                 </div>
 
             </div>

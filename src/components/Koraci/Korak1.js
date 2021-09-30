@@ -1,13 +1,14 @@
 import React from 'react'
 import Button from '../Button'
 
-const Korak1 = ({ functionality }) => {
+
+const Korak1 = ({ functionality, visibility, sendState }) => {
 
 
 
 
     return (
-        <div>
+        <div style={{ display: visibility }}>
             <div>
                 Korak 1. Odaberite proizvođača vašeg vozila
             </div>

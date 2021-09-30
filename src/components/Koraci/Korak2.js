@@ -3,7 +3,7 @@ import Kupon from './Kupon';
 import { useState } from 'react';
 import ActivatedCoupon from './ActivatedCoupon';
 
-const Korak2 = ({ nextStep, previousStep }) => {
+const Korak2 = ({ nextStep, sendState, previousStep, visibility }) => {
 
     const [couponApplied, setCouponApplied] = useState(false);
     const [data, setData] = useState({
@@ -11,7 +11,6 @@ const Korak2 = ({ nextStep, previousStep }) => {
         discountedTotal: 0,
         discount: 0
     })
-
 
     const [CouponCode] = useState('Tokić123')
 
@@ -132,9 +131,15 @@ const Korak2 = ({ nextStep, previousStep }) => {
         }
     }
 
+    function nextStepAndsend() {
+        sendState(data);
+        nextStep();
+    }
+
+
 
     return (
-        <div>
+        <div style={{ display: visibility }}>
             <div>
                 Korak 2. Odaberite jednu ili više usluga za koje ste
             </div>
@@ -171,7 +176,7 @@ const Korak2 = ({ nextStep, previousStep }) => {
             <hr />
             <div>
                 <button onClick={previousStep}>Nazad</button>
-                <button onClick={nextStep}>Dalje</button>
+                <button onClick={nextStepAndsend}>Dalje</button>
 
             </div>
 

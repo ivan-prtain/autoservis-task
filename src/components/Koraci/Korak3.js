@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Korak3 = ({ nextStep }) => {
+const Korak3 = ({ nextStep, previousStep, visibility }) => {
     return (
-        <div>
+        <div style={{ display: visibility }}>
             <div>Korak 3. Vaši kontakt podaci</div>
 
             <form id='personalData' style={{ display: 'flex', flexDirection: 'column' }}>
@@ -11,6 +11,8 @@ const Korak3 = ({ nextStep }) => {
                 <input type="text" id="telbroj" name="Broj telefona" placeholder="Broj telefona *" required />
                 <textarea id="napomena" name="Napomena" placeholder="Napomena" />
             </form>
+
+            <button onClick={previousStep}>Nazad</button>
 
             <button onClick={nextStep}>Dalje</button>
         </div>

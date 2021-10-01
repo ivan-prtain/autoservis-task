@@ -11,28 +11,24 @@ import Korak4 from '../Koraci/Korak4';
 
 const KonfiguratorModal = ({ functionality }) => {
 
-    const [korak1, setKorak1] = useState(true);
-    const [korak2, setKorak2] = useState(false);
-    const [korak3, setKorak3] = useState(false);
-    const [korak4, setKorak4] = useState(false);
+    const [korak, setKorak] = useState(1);
     const [totalPrice, setTotalPrice] = useState('');
+    const [services, setServices] = useState([])
     const [chosenCar, setChosenCar] = useState('');
-
-
-
+    const [personalInfo, setPersonalInfo] = useState({})
 
 
     const nextStep1 = () => {
-        console.log('kliknuo sam');
-        if (validate()) {
-            console.log('mozete dalje')
-            console.log(sessionStorage.getItem('carManufacturer'));
-            setKorak1(false);
-            setKorak2(true);
+        if (validate()[0]) {
+            let pickedCar = validate()[1]
+            /*  console.log('mozete dalje')
+             console.log(sessionStorage.getItem('carManufacturer')); */
+            setChosenCar(pickedCar)
+            setKorak(2);
         }
         else {
-            console.log('odlucio')
-            console.log(sessionStorage.getItem('carManufacturer'));
+            /*  console.log('odlucio')
+             console.log(sessionStorage.getItem('carManufacturer')); */
             alert('Molim vas odaberite prvo proizvođača')
         }
     }
@@ -51,8 +47,7 @@ const KonfiguratorModal = ({ functionality }) => {
         }
         sessionStorage.setItem('services', chosenServices);
         if (checkboxChecked) {
-            setKorak2(false);
-            setKorak3(true);
+            setKorak(3);
         }
         else {
             alert('Morate odabrati bar jednu uslugu!')
@@ -60,8 +55,7 @@ const KonfiguratorModal = ({ functionality }) => {
     }
 
     const previousStep2 = () => {
-        setKorak2(false);
-        setKorak1(true);
+        setKorak(1);
     }
 
     const nextStep3 = () => {
@@ -86,47 +80,52 @@ const KonfiguratorModal = ({ functionality }) => {
             }
             sessionStorage.setItem('personalData', personalData);
 
-            setKorak3(false);
-            setKorak4(true);
+            setKorak(4);
         }
     }
 
     const previousStep3 = () => {
-        setKorak3(false);
-        setKorak2(true);
+        setKorak(2);
     }
 
-    const report = () => {
-        console.log('ono sto je poslano')
-        console.log(chosenCar)
+    const edit = (step) => {
+        setKorak(step)
     }
+
 
 
     return (
         <Router>
             <div className='modal-background'>
                 <div className='modal-container'>
-                    <button onClick={functionality}>X</button>
-                    <h3>Konfigurator servisa</h3>
+                    <button className='close' onClick={functionality}>X</button>
+                    <h3 className='title'>Konfigurator servisa</h3>
                     < Korak1
                         functionality={nextStep1}
-                        visibility={korak1 ? '' : 'none'}
+                        visibility={korak == 1 ? '' : 'none'}
                         sendState={chosenCar => setChosenCar(chosenCar)}
                     />
 
                     < Korak2
                         nextStep={nextStep2}
                         sendState={totalPrice => setTotalPrice(totalPrice)}
+                        sendState2={services => setServices(services)}
                         previousStep={previousStep2}
-                        visibility={korak2 ? '' : 'none'} />
+                        visibility={korak == 2 ? '' : 'none'} />
                     < Korak3
                         nextStep={nextStep3}
                         previousStep={previousStep3}
-                        visibility={korak3 ? '' : 'none'} />
-                    < Korak4 visibility={korak4 ? '' : 'none'} />
+                        visibility={korak == 3 ? '' : 'none'}
+                        sendInfo={personalInfo => setPersonalInfo(personalInfo)} />
+                    < Korak4 visibility={korak == 4 ? '' : 'none'}
+                        carInfo={chosenCar}
+                        price={totalPrice}
+                        services={services}
+                        personalInfo={personalInfo}
+                        edit={korak => setKorak(korak)}
+                    />
 
                 </div>
-
             </div>
         </Router>
     )

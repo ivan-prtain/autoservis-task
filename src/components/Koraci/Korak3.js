@@ -1,6 +1,27 @@
 import React from 'react'
 
-const Korak3 = ({ nextStep, previousStep, visibility }) => {
+const Korak3 = ({ nextStep, previousStep, visibility, sendInfo }) => {
+
+    let personalInfo = {
+        imeIprezime: '',
+        email: '',
+        telbroj: '',
+        napomena: ''
+    }
+
+    function saveInfo() {
+        personalInfo.imeIprezime = document.getElementById('imeiprezime').value
+        personalInfo.email = document.getElementById('email').value
+        personalInfo.telbroj = document.getElementById('telbroj').value
+        personalInfo.napomena = document.getElementById('napomena').value
+    }
+
+    function nextStepAndsend() {
+        saveInfo()
+        sendInfo(personalInfo)
+        nextStep();
+    }
+
     return (
         <div style={{ display: visibility }}>
             <div>Korak 3. Vaši kontakt podaci</div>
@@ -14,7 +35,7 @@ const Korak3 = ({ nextStep, previousStep, visibility }) => {
 
             <button onClick={previousStep}>Nazad</button>
 
-            <button onClick={nextStep}>Dalje</button>
+            <button onClick={nextStepAndsend}>Dalje</button>
         </div>
     )
 }

@@ -38,7 +38,7 @@ const Korak1 = ({ functionality, visibility, sendState }) => {
             </form>
             <hr />
 
-            <Button text='dalje' functionality={functionality} />
+            <Button text='Dalje' functionality={functionality} />
 
         </div>
     )

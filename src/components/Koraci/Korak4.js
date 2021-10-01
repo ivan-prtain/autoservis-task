@@ -1,13 +1,10 @@
 import React from 'react'
+import ServiceDetail from './ServiceDetail'
+import './Koraci.css'
 
-const Korak4 = ({ visibility }) => {
+const Korak4 = ({ visibility, carInfo, price, services, personalInfo, edit }) => {
 
-    /* function loadInfo() {
-        let selectedCar = document.getElementById('Peugeot');
-        document.getElementById('carModel').innerText = selectedCar;
-    } */
 
-    /* loadInfo(); */
 
     return (
         <div style={{ display: visibility }}>
@@ -20,29 +17,65 @@ const Korak4 = ({ visibility }) => {
             </p>
 
             <div style={{ display: 'flex' }}>
-                <div>
-                    <h2>Model vozila</h2>
-                    <span id='carModel'></span>
-                    <button>Uredi</button>
+                <div className='sumup-container'>
+                    <div className='sumup-title'>MODEL VOZILA
+                        <button className='sumup-button' onClick={() => edit(1)}>Uredi</button>
+                    </div>
+                    <span id='carModel'>{carInfo}</span>
+
                 </div>
 
-                <div>
-                    <h2>Odabrane usluge</h2>
-                    <span id='finalServicesChoice'></span>
-                    <button>Uredi</button>
+                <div className='sumup-container'>
+                    <div className='sumup-title'>ODABRANE USLUGE
+                        <button className='sumup-button' onClick={() => edit(2)}>Uredi</button>
+                    </div>
+                    <div id='services-container'>
+                        {services.map((service) => (
+                            <ServiceDetail key={service[0]} service={service} />
+                        ))}
+                    </div>
+                    {price.discountedTotal &&
+                        <div>
+                            <span>Popust 30%:</span> <span className='service-price'>-{price.discount} Kn</span>
+                        </div>}
+
+                    <div>
+                        <span>Ukupno:</span> <span id='sumup-total' className='service-price'>{price.discountedTotal ? price.discountedTotal : price.total} Kn</span>
+                    </div>
+
+
 
                 </div>
             </div>
+            <hr />
 
             <div style={{ display: 'flex' }}>
-                <div>
-                    <h2>Kontakt podaci</h2>
-                    <span id='finalPersonalInfo'></span>
-                    <button>Uredi</button>
+                <div className='sumup-container'>
+                    <div className='sumup-title'>KONTAKT PODACI
+                        <button className='sumup-button' onClick={() => edit(3)}>Uredi</button>
+                    </div>
+                    <div>
+                        <span>Ime i prezime:</span> <span>{personalInfo.imeIprezime}</span>
+                    </div>
+                    <div>
+                        <span>Email:</span> <span>{personalInfo.email}</span>
+                    </div>
+
+
                 </div>
 
-
+                <div className='sumup-container'>
+                    <div>
+                        <span>Broj Telefona:</span> <span>{personalInfo.telbroj}</span>
+                    </div>
+                    <div>
+                        <span>Napomena:</span> <span>{personalInfo.napomena}</span>
+                    </div>
+                </div>
             </div>
+            <hr />
+            <button>Nazad</button>
+            <button>Pošalji</button>
 
 
         </div>

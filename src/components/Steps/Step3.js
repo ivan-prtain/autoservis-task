@@ -1,6 +1,7 @@
 import React from 'react'
+import './Steps.css'
 
-const Korak3 = ({ nextStep, previousStep, visibility, sendInfo }) => {
+const Step3 = ({ nextStep, previousStep, visibility, sendInfo }) => {
 
     let personalInfo = {
         imeIprezime: '',
@@ -33,11 +34,11 @@ const Korak3 = ({ nextStep, previousStep, visibility, sendInfo }) => {
                 <textarea id="napomena" name="Napomena" placeholder="Napomena" />
             </form>
 
-            <button onClick={previousStep}>Nazad</button>
+            <button className='btn' onClick={previousStep}>Nazad</button>
 
-            <button onClick={nextStepAndsend}>Dalje</button>
+            <button className='btn' onClick={nextStepAndsend}>Dalje</button>
         </div>
     )
 }
 
-export default Korak3
+export default Step3

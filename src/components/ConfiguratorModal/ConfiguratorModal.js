@@ -1,18 +1,18 @@
 import React from 'react'
-import Korak1 from '../Koraci/Korak1'
-import Korak2 from '../Koraci/Korak2';
-import './KonfiguratorModal.css'
+import Step1 from '../Steps/Step1'
+import Step2 from '../Steps/Step2';
+import './ConfiguratorModal.css'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { useState } from 'react';
-import { validate, saveCarManufacturer } from '../Koraci/Korak1Functions';
-import Korak3 from '../Koraci/Korak3';
-import Korak4 from '../Koraci/Korak4';
+import { validate } from '../Steps/Step1Functions';
+import Step3 from '../Steps/Step3';
+import Step4 from '../Steps/Step4';
 
 
-const KonfiguratorModal = ({ functionality }) => {
+const ConfiguratorModal = ({ functionality }) => {
 
-    const [korak, setKorak] = useState(1);
-    const [totalPrice, setTotalPrice] = useState('');
+    const [step, setStep] = useState(1);
+    const [totalPrice, setTotalPrice] = useState(0);
     const [services, setServices] = useState([])
     const [chosenCar, setChosenCar] = useState('');
     const [personalInfo, setPersonalInfo] = useState({})
@@ -21,14 +21,10 @@ const KonfiguratorModal = ({ functionality }) => {
     const nextStep1 = () => {
         if (validate()[0]) {
             let pickedCar = validate()[1]
-            /*  console.log('mozete dalje')
-             console.log(sessionStorage.getItem('carManufacturer')); */
             setChosenCar(pickedCar)
-            setKorak(2);
+            setStep(2);
         }
         else {
-            /*  console.log('odlucio')
-             console.log(sessionStorage.getItem('carManufacturer')); */
             alert('Molim vas odaberite prvo proizvođača')
         }
     }
@@ -45,9 +41,8 @@ const KonfiguratorModal = ({ functionality }) => {
                 checkboxChecked = true;
             }
         }
-        sessionStorage.setItem('services', chosenServices);
         if (checkboxChecked) {
-            setKorak(3);
+            setStep(3);
         }
         else {
             alert('Morate odabrati bar jednu uslugu!')
@@ -55,7 +50,7 @@ const KonfiguratorModal = ({ functionality }) => {
     }
 
     const previousStep2 = () => {
-        setKorak(1);
+        setStep(1);
     }
 
     const nextStep3 = () => {
@@ -78,18 +73,17 @@ const KonfiguratorModal = ({ functionality }) => {
                 personalData.push(forma[i].name)
                 personalData.push(forma[i].value)
             }
-            sessionStorage.setItem('personalData', personalData);
 
-            setKorak(4);
+            setStep(4);
         }
     }
 
     const previousStep3 = () => {
-        setKorak(2);
+        setStep(2);
     }
 
     const edit = (step) => {
-        setKorak(step)
+        setStep(step)
     }
 
 
@@ -100,29 +94,29 @@ const KonfiguratorModal = ({ functionality }) => {
                 <div className='modal-container'>
                     <button className='close' onClick={functionality}>X</button>
                     <h3 className='title'>Konfigurator servisa</h3>
-                    < Korak1
+                    < Step1
                         functionality={nextStep1}
-                        visibility={korak == 1 ? '' : 'none'}
+                        visibility={step == 1 ? '' : 'none'}
                         sendState={chosenCar => setChosenCar(chosenCar)}
                     />
 
-                    < Korak2
+                    < Step2
                         nextStep={nextStep2}
                         sendState={totalPrice => setTotalPrice(totalPrice)}
                         sendState2={services => setServices(services)}
                         previousStep={previousStep2}
-                        visibility={korak == 2 ? '' : 'none'} />
-                    < Korak3
+                        visibility={step == 2 ? '' : 'none'} />
+                    < Step3
                         nextStep={nextStep3}
                         previousStep={previousStep3}
-                        visibility={korak == 3 ? '' : 'none'}
+                        visibility={step == 3 ? '' : 'none'}
                         sendInfo={personalInfo => setPersonalInfo(personalInfo)} />
-                    < Korak4 visibility={korak == 4 ? '' : 'none'}
+                    < Step4 visibility={step == 4 ? '' : 'none'}
                         carInfo={chosenCar}
                         price={totalPrice}
                         services={services}
                         personalInfo={personalInfo}
-                        edit={korak => setKorak(korak)}
+                        edit={step => setStep(step)}
                     />
 
                 </div>
@@ -131,5 +125,5 @@ const KonfiguratorModal = ({ functionality }) => {
     )
 }
 
-export default KonfiguratorModal
+export default ConfiguratorModal
 

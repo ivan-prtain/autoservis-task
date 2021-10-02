@@ -1,8 +1,8 @@
 import React from 'react'
 import ServiceDetail from './ServiceDetail'
-import './Koraci.css'
+import './Steps.css'
 
-const Korak4 = ({ visibility, carInfo, price, services, personalInfo, edit }) => {
+const Step4 = ({ visibility, carInfo, price, services, personalInfo, edit }) => {
 
 
 
@@ -19,7 +19,7 @@ const Korak4 = ({ visibility, carInfo, price, services, personalInfo, edit }) =>
             <div style={{ display: 'flex' }}>
                 <div className='sumup-container'>
                     <div className='sumup-title'>MODEL VOZILA
-                        <button className='sumup-button' onClick={() => edit(1)}>Uredi</button>
+                        <button className='sumup-button btn' onClick={() => edit(1)}>Uredi</button>
                     </div>
                     <span id='carModel'>{carInfo}</span>
 
@@ -27,7 +27,7 @@ const Korak4 = ({ visibility, carInfo, price, services, personalInfo, edit }) =>
 
                 <div className='sumup-container'>
                     <div className='sumup-title'>ODABRANE USLUGE
-                        <button className='sumup-button' onClick={() => edit(2)}>Uredi</button>
+                        <button className='sumup-button btn' onClick={() => edit(2)}>Uredi</button>
                     </div>
                     <div id='services-container'>
                         {services.map((service) => (
@@ -52,7 +52,7 @@ const Korak4 = ({ visibility, carInfo, price, services, personalInfo, edit }) =>
             <div style={{ display: 'flex' }}>
                 <div className='sumup-container'>
                     <div className='sumup-title'>KONTAKT PODACI
-                        <button className='sumup-button' onClick={() => edit(3)}>Uredi</button>
+                        <button className='sumup-button btn' onClick={() => edit(3)}>Uredi</button>
                     </div>
                     <div>
                         <span>Ime i prezime:</span> <span>{personalInfo.imeIprezime}</span>
@@ -74,12 +74,12 @@ const Korak4 = ({ visibility, carInfo, price, services, personalInfo, edit }) =>
                 </div>
             </div>
             <hr />
-            <button>Nazad</button>
-            <button>Pošalji</button>
+            <button className='btn'>Nazad</button>
+            <button className='btn'>Pošalji</button>
 
 
         </div>
     )
 }
 
-export default Korak4
+export default Step4

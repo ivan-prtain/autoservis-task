@@ -1,8 +1,9 @@
 import React from 'react'
 import Button from '../Button'
+import './Steps.css'
 
 
-const Korak1 = ({ functionality, visibility, sendState }) => {
+const Step1 = ({ functionality, visibility, sendState }) => {
 
 
 
@@ -44,4 +45,4 @@ const Korak1 = ({ functionality, visibility, sendState }) => {
     )
 }
 
-export default Korak1
+export default Step1

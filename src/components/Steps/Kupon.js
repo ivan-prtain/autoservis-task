@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import './Steps.css'
 
 const Kupon = ({ applyCoupon }) => {
     const [kupon, setKupon] = useState(false)
@@ -12,7 +13,7 @@ const Kupon = ({ applyCoupon }) => {
         <div>
 
             {
-                !kupon && <button onClick={activateCouponInput}>Imam Kupon</button>
+                !kupon && <button className='btn' onClick={activateCouponInput}>Imam Kupon</button>
             }
 
             {
@@ -20,7 +21,7 @@ const Kupon = ({ applyCoupon }) => {
 
                 <form >
                     <input id='couponNumber' type='text' placeholder='Unesite kod kupona ovdje'></input>
-                    <button onClick={applyCoupon}>Primjeni</button>
+                    <button className='btn' onClick={applyCoupon}>Primjeni</button>
                 </form>
 
 

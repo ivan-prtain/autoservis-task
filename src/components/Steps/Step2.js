@@ -2,9 +2,9 @@ import React from 'react'
 import Kupon from './Kupon';
 import { useState } from 'react';
 import ActivatedCoupon from './ActivatedCoupon';
-import './Koraci.css'
+import './Steps.css'
 
-const Korak2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) => {
+const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) => {
 
     const [couponApplied, setCouponApplied] = useState(false);
     const [data, setData] = useState({
@@ -16,12 +16,9 @@ const Korak2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =
 
     const [CouponCode] = useState('Tokić123')
 
-    let total = 0;
-    let discountedTotal = 0;
-    let discount = 0;
 
     function calculate(e) {
-        total = data.total;
+        let total = data.total;
         let service = e.target.name;
         let serviceCost = e.target.value;
         let serviceDetails = [service, serviceCost]
@@ -30,17 +27,8 @@ const Korak2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =
         console.log('stize servis')
         console.log(services);
         if (couponApplied) {
-            /* console.log('checked - kupon aktiviran - uslo u kalkulaciju')
-            console.log(total);
-            console.log(discountedTotal); */
-
-            discountedTotal = data.discountedTotal;
-            discount = data.discount;
-
-            /*  console.log('checked - kupon aktiviran - discounted total bi sad trebao biti postavljen')
-             console.log(total);
-             console.log(discountedTotal); */
-
+            let discountedTotal = data.discountedTotal;
+            let discount = data.discount;
             let itemValue = Number(e.target.value);
             let discountedItemValue = 0
             discountedItemValue = itemValue - (itemValue * 0.3);
@@ -49,27 +37,17 @@ const Korak2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =
                 total += itemValue;
                 discountedTotal += discountedItemValue;
                 discount += itemValue * 0.3;
-                document.getElementById('servicePrice').innerText = parseInt(discountedTotal);
-                document.getElementById('osnovica').innerText = parseInt(total);
-                document.getElementById('popust').innerText = parseInt(discount);
 
                 setData({
                     total: total,
                     discountedTotal: discountedTotal,
                     discount: discount
                 })
-
-                /*  console.log('checked - kupon aktiviran - nakon kaluklacije')
-                 console.log(total);
-                 console.log(discountedTotal); */
             }
             else {
                 total -= itemValue;
                 discountedTotal -= discountedItemValue;
                 discount -= itemValue * 0.3;
-                document.getElementById('servicePrice').innerText = parseInt(discountedTotal);
-                document.getElementById('osnovica').innerText = parseInt(total);
-                document.getElementById('popust').innerText = parseInt(discount);
 
                 setData({
                     total: total,
@@ -79,76 +57,46 @@ const Korak2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =
 
                 let updatedServices = services.filter(iteratedService => iteratedService[0] !== service)
                 setServices(updatedServices);
-                /*   console.log('unchecked - kupon aktiviran - nakon kaluklacije')
-                  console.log(total);
-                  console.log(discountedTotal); */
-
-                /*  servicesCopy = services;
- 
-                 setServices(services.filter((iteratedService) => iteratedService[0] !== service))
-                 console.log('stize servis')
-                 console.log(services); */
             }
-
-
         }
         else {
-            /*  console.log('checked - kupon neaktiviran - uslo u kaluklacije')
-             console.log(total);
-             console.log(discountedTotal); */
             if (e.target.checked === true) {
                 total += Number(e.target.value);
                 setData({
                     total: total
                 })
-                document.getElementById('servicePrice').innerText = parseInt(total);
-                /*  console.log('checked - kupon neaktiviran - nakon kaluklacije')
-                 console.log(total);
-                 console.log(discountedTotal); */
             }
             else {
                 total -= Number(e.target.value);
                 setData({
                     total: total
                 })
-                document.getElementById('servicePrice').innerText = parseInt(total);
+
 
                 let updatedServices = services.filter(iteratedService => iteratedService[0] !== service)
                 setServices(updatedServices)
                 console.log(services)
-
-                /*  console.log('checked - kupon neaktiviran - nakon kaluklacije')
-                 console.log(total);
-                 console.log(discountedTotal); */
             }
-
         }
     }
 
     const applyCoupon = (e) => {
         e.preventDefault()
-        total = data.total;
-        /*   console.log(total);
-          console.log(discountedTotal); */
+        let total = data.total;
+        let discountedTotal = data.discountedTotal;
+        let discount = data.discount;
 
         let couponNumber = document.getElementById('couponNumber').value;
         if (couponNumber == CouponCode) {
-            /*   console.log('ovo je okinuto'); */
             discountedTotal = total - (total * 0.3)
             discount = total * 0.3
-            document.getElementById('servicePrice').innerText = parseInt(discountedTotal);
+
             setData({
                 total: total,
                 discountedTotal: discountedTotal,
                 discount: discount
             })
             setCouponApplied(true);
-            setTimeout(function () {
-                document.getElementById('osnovica').innerText = parseInt(total);
-                document.getElementById('popust').innerText = parseInt(discount);
-            }, 0);
-            /* console.log(total);
-            console.log(discountedTotal); */
         }
         else {
             alert('Nepostojeći kupon!')
@@ -160,7 +108,6 @@ const Korak2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =
         sendState2(services);
         nextStep();
     }
-
 
 
     return (
@@ -192,22 +139,21 @@ const Korak2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =
 
             {!couponApplied && <Kupon applyCoupon={applyCoupon} />}
 
-            {couponApplied && <ActivatedCoupon />}
+            {couponApplied && <ActivatedCoupon total={data.total} discount={data.discount} />}
 
             <div>
-                <span>Ukupno</span> <span id='servicePrice'>0</span> <span>Kn</span>
+                <span>Ukupno</span> <span id='servicePrice'>{data.discountedTotal ? data.discountedTotal : data.total}</span> <span>Kn</span>
             </div>
 
             <hr />
             <div>
-                <button onClick={previousStep}>Nazad</button>
-                <button onClick={nextStepAndsend}>Dalje</button>
+                <button className='btn' onClick={previousStep}>Nazad</button>
+                <button className='btn' onClick={nextStepAndsend}>Dalje</button>
 
             </div>
-
 
         </div>
     )
 }
 
-export default Korak2
+export default Step2

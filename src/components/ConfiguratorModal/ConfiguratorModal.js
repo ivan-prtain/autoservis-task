@@ -24,10 +24,17 @@ const ConfiguratorModal = ({ functionality }) => {
         balansiranjeGuma: false,
         uljeKocnica: false
     })
-    const [personalInfo, setPersonalInfo] = useState({});
+    const [personalInfo, setPersonalInfo] = useState({
+        imeIprezime: '',
+        email: '',
+        telbroj: '',
+        napomena: ''
+    });
     const [test, setTest] = useState();
 
     const saveCheckbox = (id, condition) => {
+        console.log(id)
+        console.log(condition)
         let checkboxesCopy = checkboxes;
         checkboxesCopy[id] = condition;
         setCheckboxes(checkboxesCopy);
@@ -113,20 +120,16 @@ const ConfiguratorModal = ({ functionality }) => {
     }
 
 
-
-
-
     return (
         <Router>
             <div className='modal-background'>
                 <div className='modal-container'>
                     <button className='close' onClick={functionality}>X</button>
                     <h3 className='title'>Konfigurator servisa</h3>
-                    < Step1
+                    {step == 1 && < Step1
                         functionality={nextStep1}
-                        visibility={step == 1 ? '' : 'none'}
-                        sendState={chosenCar => setChosenCar(chosenCar)}
-                    />
+                        selected={chosenCar}
+                    />}
 
                     {step == 2 && < Step2
                         nextStep={nextStep2}
@@ -141,7 +144,9 @@ const ConfiguratorModal = ({ functionality }) => {
                         nextStep={nextStep3}
                         previousStep={previousStep3}
                         visibility={step == 3 ? '' : 'none'}
-                        sendInfo={personalInfo => setPersonalInfo(personalInfo)} />
+                        setPersonalInfo={setPersonalInfo}
+                        personalInfo={personalInfo}
+                    />
                     < Step4 visibility={step == 4 ? '' : 'none'}
                         carInfo={chosenCar}
                         price={totalPrice}

@@ -1,26 +1,22 @@
 import React from 'react'
 import './Steps.css'
 
-const Step3 = ({ nextStep, previousStep, visibility, sendInfo }) => {
+const Step3 = ({ nextStep, previousStep, visibility, setPersonalInfo, personalInfo }) => {
 
-    let personalInfo = {
-        imeIprezime: '',
-        email: '',
-        telbroj: '',
-        napomena: ''
-    }
+    let personalInfoCopy = personalInfo;
+    let bucket = []
 
-    function saveInfo() {
-        personalInfo.imeIprezime = document.getElementById('imeiprezime').value
-        personalInfo.email = document.getElementById('email').value
-        personalInfo.telbroj = document.getElementById('telbroj').value
-        personalInfo.napomena = document.getElementById('napomena').value
+    let handleChange = input => e => {
+        bucket.push({ [input]: e.target.value })
     }
 
     function nextStepAndsend() {
-        saveInfo()
-        sendInfo(personalInfo)
+
         nextStep();
+    }
+
+    function customClick() {
+        console.log(bucket)
     }
 
     return (
@@ -28,15 +24,15 @@ const Step3 = ({ nextStep, previousStep, visibility, sendInfo }) => {
             <div>Korak 3. Vaši kontakt podaci</div>
 
             <form id='personalData' style={{ display: 'flex', flexDirection: 'column' }}>
-                <input type="text" id="imeiprezime" name="Ime i Prezime" placeholder="Ime i Prezime *" required />
+                <input type="text" id="imeiprezime" name="Ime i Prezime" placeholder="Ime i Prezime *" defaultValue={''} onChange={handleChange('')} required />
                 <input type="text" id="email" name="Email adresa" placeholder="Email adresa *" required />
                 <input type="text" id="telbroj" name="Broj telefona" placeholder="Broj telefona *" required />
-                <textarea id="napomena" name="Napomena" placeholder="Napomena" />
+                <textarea id="napomena" name="Napomena" placeholder="Napomena" value={personalInfo.napomena} />
             </form>
 
             <button className='btn' onClick={previousStep}>Nazad</button>
 
-            <button className='btn' onClick={nextStepAndsend}>Dalje</button>
+            <button className='btn' onClick={customClick}>Dalje</button>
         </div>
     )
 }

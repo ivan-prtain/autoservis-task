@@ -19,7 +19,7 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
     function calculate(e) {
         let total = data.total;
         let service = e.target.name;
-        let serviceId = e.target.service;
+        let serviceId = e.target.id;
         let serviceCost = e.target.value;
         let serviceDetails = [service, serviceCost]
 

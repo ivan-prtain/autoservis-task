@@ -3,8 +3,15 @@ import Button from '../Button'
 import './Steps.css'
 
 
-const Step1 = ({ functionality, visibility, sendState }) => {
+const Step1 = ({ functionality, visibility, selected }) => {
 
+    if (selected !== '') {
+
+        setTimeout(() => {
+            document.getElementById(selected).checked = true
+        }, 0);
+
+    }
 
 
 

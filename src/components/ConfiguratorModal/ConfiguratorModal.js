@@ -15,8 +15,23 @@ const ConfiguratorModal = ({ functionality }) => {
     const [step, setStep] = useState(1);
     const [chosenCar, setChosenCar] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
-    const [services, setServices] = useState([])
-    const [personalInfo, setPersonalInfo] = useState({})
+    const [services, setServices] = useState([]);
+    const [checkboxes, setCheckboxes] = useState({
+        uljeifilter: false,
+        promjenaPakni: false,
+        promjenaGuma: false,
+        servisKlime: false,
+        balansiranjeGuma: false,
+        uljeKocnica: false
+    })
+    const [personalInfo, setPersonalInfo] = useState({});
+    const [test, setTest] = useState();
+
+    const saveCheckbox = (id, condition) => {
+        let checkboxesCopy = checkboxes;
+        checkboxesCopy[id] = condition;
+        setCheckboxes(checkboxesCopy);
+    }
 
 
     const nextStep1 = () => {
@@ -91,6 +106,12 @@ const ConfiguratorModal = ({ functionality }) => {
         setStep(3)
     }
 
+    const saveTest = (data) => {
+        let testCopy = test;
+        testCopy[data.id] = data.checked;
+        setTest(testCopy);
+    }
+
 
 
 
@@ -107,12 +128,15 @@ const ConfiguratorModal = ({ functionality }) => {
                         sendState={chosenCar => setChosenCar(chosenCar)}
                     />
 
-                    < Step2
+                    {step == 2 && < Step2
                         nextStep={nextStep2}
                         sendState={totalPrice => setTotalPrice(totalPrice)}
                         sendState2={services => setServices(services)}
                         previousStep={previousStep2}
-                        visibility={step == 2 ? '' : 'none'} />
+                        checkboxes={checkboxes}
+                        saveCheckbox={saveCheckbox}
+                        checkboxes={checkboxes}
+                    />}
                     < Step3
                         nextStep={nextStep3}
                         previousStep={previousStep3}

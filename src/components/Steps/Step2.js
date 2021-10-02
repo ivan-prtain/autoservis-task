@@ -4,7 +4,7 @@ import { useState } from 'react';
 import ActivatedCoupon from './ActivatedCoupon';
 import './Steps.css'
 
-const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) => {
+const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, saveCheckbox }) => {
 
     const [couponApplied, setCouponApplied] = useState(false);
     const [data, setData] = useState({
@@ -16,13 +16,12 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =>
 
     const [CouponCode] = useState('Tokić123')
 
-
     function calculate(e) {
         let total = data.total;
         let service = e.target.name;
+        let serviceId = e.target.service;
         let serviceCost = e.target.value;
-        let serviceId = e.target.id;
-        let serviceDetails = [service, serviceCost, serviceId]
+        let serviceDetails = [service, serviceCost]
 
         setServices([...services, serviceDetails])
         console.log('stize servis')
@@ -34,6 +33,7 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =>
             let discountedItemValue = 0
             discountedItemValue = itemValue - (itemValue * 0.3);
             if (e.target.checked === true) {
+                saveCheckbox(serviceId, true)
 
                 total += itemValue;
                 discountedTotal += discountedItemValue;
@@ -46,6 +46,7 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =>
                 })
             }
             else {
+                saveCheckbox(serviceId, false)
                 total -= itemValue;
                 discountedTotal -= discountedItemValue;
                 discount -= itemValue * 0.3;
@@ -62,12 +63,14 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =>
         }
         else {
             if (e.target.checked === true) {
+                saveCheckbox(serviceId, true)
                 total += Number(e.target.value);
                 setData({
                     total: total
                 })
             }
             else {
+                saveCheckbox(serviceId, false)
                 total -= Number(e.target.value);
                 setData({
                     total: total
@@ -111,29 +114,30 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =>
     }
 
 
+
     return (
-        <div style={{ display: visibility }}>
+        <div >
             <div>
                 Korak 2. Odaberite jednu ili više usluga za koje ste
             </div>
 
-            <form style={{ height: '10rem' }} id='servicesForm' name='Zamjena ulja i filtera'>
-                <input type='checkbox' className='regular-checkbox' id="uljeifilter" name="Ulje i filter" value="500" onChange={calculate} />
+            <form style={{ height: '10rem' }} id='servicesForm' >
+                <input type='checkbox' checked={checkboxes.uljeifilter} className='regular-checkbox' id="uljeifilter" name="Ulje i filter" value="500" onChange={calculate} />
                 <label className='checkbox-label' htmlFor="uljeifilter">Zamjena ulja i filtera (500kn)</label>
 
-                <input type="checkbox" className='regular-checkbox' id="promjenaPakni" name="Promjena pakni" value="450" onChange={calculate} />
+                <input type="checkbox" checked={checkboxes.promjenaPakni} className='regular-checkbox' id="promjenaPakni" name="Promjena pakni" value="450" onChange={calculate} />
                 <label className='checkbox-label' htmlFor="promjenaPakni">Promjena pakni (450kn)</label>
 
-                <input type="checkbox" className='regular-checkbox' id="promijenaGuma" name="Promijena guma" value="100" onChange={calculate} />
+                <input type="checkbox" checked={checkboxes.promjenaGuma} className='regular-checkbox' id="promjenaGuma" name="Promjena guma" value="100" onChange={calculate} />
                 <label className='checkbox-label' htmlFor="promijenaGuma">Promijena guma (100kn)</label>
 
-                <input type="checkbox" className='regular-checkbox' id="servisKlime" name="Servis klima uređaja" value="299" onChange={calculate} />
+                <input type="checkbox" checked={checkboxes.servisKlime} className='regular-checkbox' id="servisKlime" name="Servis klima uređaja" value="299" onChange={calculate} />
                 <label className='checkbox-label' htmlFor="servisKlime">Servis klima uređaja (299kn)</label>
 
-                <input type="checkbox" className='regular-checkbox' id="balansiranjeGuma" name="Balansiranje guma" value="50" onChange={calculate} />
+                <input type="checkbox" checked={checkboxes.balansiranjeGuma} className='regular-checkbox' id="balansiranjeGuma" name="Balansiranje guma" value="50" onChange={calculate} />
                 <label className='checkbox-label' htmlFor="balansiranjeGuma">Balansiranje guma (50kn)</label>
 
-                <input type="checkbox" className='regular-checkbox' id="uljeKocnica" name="Zamjena ulja u kočnicama" value="229" onChange={calculate} />
+                <input type="checkbox" checked={checkboxes.uljeKocnica} className='regular-checkbox' id="uljeKocnica" name="Zamjena ulja u kočnicama" value="229" onChange={calculate} />
                 <label className='checkbox-label' htmlFor="uljeKocnica">Zamjena ulja u kočnicama (229kn)</label>
 
             </form>

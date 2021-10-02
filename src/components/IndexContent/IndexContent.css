@@ -1,0 +1,38 @@
+.main-content{
+    background-image: url("https://wallpaperaccess.com/full/1243079.jpg");
+    height: 30rem;
+    background-size: cover;
+}
+
+.line{
+    margin-bottom:0px;
+}
+
+.main-content-title{
+    background-color: white;
+    opacity:0.8;
+    padding-bottom: 5px;
+}
+
+.start-button{
+    display: inline-block;
+	background: #fff;
+	color: #000;
+	border: none;
+	padding: 10px 20px;
+	margin: 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 15px;
+	font-family: inherit;
+    background-color: #fff;
+    box-shadow: 0px 8px 15px rgba(252, 249, 249, 0.918);
+}
+
+.start-button:hover {
+    background-color: #2EE59D;
+    box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }

@@ -7,14 +7,15 @@ import { useState } from 'react';
 import { validate } from '../Steps/Step1Functions';
 import Step3 from '../Steps/Step3';
 import Step4 from '../Steps/Step4';
+import Step5 from '../Steps/Step5';
 
 
 const ConfiguratorModal = ({ functionality }) => {
 
     const [step, setStep] = useState(1);
+    const [chosenCar, setChosenCar] = useState('');
     const [totalPrice, setTotalPrice] = useState(0);
     const [services, setServices] = useState([])
-    const [chosenCar, setChosenCar] = useState('');
     const [personalInfo, setPersonalInfo] = useState({})
 
 
@@ -82,6 +83,14 @@ const ConfiguratorModal = ({ functionality }) => {
         setStep(2);
     }
 
+    const nextStep4 = () => {
+        setStep(5)
+    }
+
+    const previousStep4 = () => {
+        setStep(3)
+    }
+
 
 
 
@@ -115,7 +124,12 @@ const ConfiguratorModal = ({ functionality }) => {
                         services={services}
                         personalInfo={personalInfo}
                         edit={step => setStep(step)}
+                        nextStep={nextStep4}
+                        previousStep={previousStep4}
                     />
+                    < Step5 visibility={step == 5 ? '' : 'none'}
+                    />
+
 
                 </div>
             </div>

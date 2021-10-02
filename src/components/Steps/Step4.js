@@ -2,7 +2,7 @@ import React from 'react'
 import ServiceDetail from './ServiceDetail'
 import './Steps.css'
 
-const Step4 = ({ visibility, carInfo, price, services, personalInfo, edit }) => {
+const Step4 = ({ visibility, carInfo, price, services, personalInfo, edit, nextStep, previousStep }) => {
 
 
 
@@ -74,8 +74,8 @@ const Step4 = ({ visibility, carInfo, price, services, personalInfo, edit }) => 
                 </div>
             </div>
             <hr />
-            <button className='btn'>Nazad</button>
-            <button className='btn'>Pošalji</button>
+            <button className='btn' onClick={previousStep}>Nazad</button>
+            <button className='btn' onClick={nextStep}>Pošalji</button>
 
 
         </div>

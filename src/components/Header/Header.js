@@ -12,7 +12,7 @@ const Header = ({ cssTheme }) => {
                     <h4 className='header-text'>Izračunajte trošak servisa</h4>
                 </div>
             </div>
-            <hr />
+            <hr className='line' />
 
 
         </div>

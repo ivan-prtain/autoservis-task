@@ -21,7 +21,8 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, visibility }) =>
         let total = data.total;
         let service = e.target.name;
         let serviceCost = e.target.value;
-        let serviceDetails = [service, serviceCost]
+        let serviceId = e.target.id;
+        let serviceDetails = [service, serviceCost, serviceId]
 
         setServices([...services, serviceDetails])
         console.log('stize servis')

@@ -82,9 +82,7 @@ const ConfiguratorModal = ({ functionality }) => {
         setStep(2);
     }
 
-    const edit = (step) => {
-        setStep(step)
-    }
+
 
 
 

@@ -5,54 +5,44 @@ import './Steps.css'
 
 const Step1 = ({ functionality, selected }) => {
 
-    if (selected !== '') {
-
-        setTimeout(() => {
-            document.getElementById(selected).checked = true
-        }, 0);
-
-    }
-
-
-
     return (
         <div>
-            <div>
+            <div className='step-title'>
                 Korak 1. Odaberite proizvođača vašeg vozila
             </div>
             <form className='radio-form' name='radioForm'>
                 <div className='radio-elements'>
 
                     <label htmlFor="Peugeot">
-                        <input type='radio' id='Peugeot' value='Peugeot' name='manufacturer' />
+                        <input type='radio' id='Peugeot' value='Peugeot' name='manufacturer' defaultChecked={selected == 'Peugeot'} />
                         Peugeot
                     </label>
                     <label htmlFor="Volkswagen">
-                        <input type='radio' id='Volkswagen' value='Volkswagen' name='manufacturer' />
+                        <input type='radio' id='Volkswagen' value='Volkswagen' name='manufacturer' defaultChecked={selected == 'Volkswagen'} />
                         Volkswagen
                     </label>
                     <label htmlFor="Citroen">
-                        <input type='radio' id='Citroen' value='Citroen' name='manufacturer' />
+                        <input type='radio' id='Citroen' value='Citroen' name='manufacturer' defaultChecked={selected == 'Citroen'} />
                         Citroen
                     </label>
                     <label htmlFor="Audi">
-                        <input type='radio' id='Audi' value='Audi' name='manufacturer' />
+                        <input type='radio' id='Audi' value='Audi' name='manufacturer' defaultChecked={selected == 'Audi'} />
                         Audi
                     </label>
                     <label htmlFor="BMW">
-                        <input type='radio' id='BMW' value='BMW' name='manufacturer' />
+                        <input type='radio' id='BMW' value='BMW' name='manufacturer' defaultChecked={selected == 'BMW'} />
                         BMW
                     </label>
                     <label htmlFor="Seat">
-                        <input type='radio' id='Seat' value='Seat' name='manufacturer' />
+                        <input type='radio' id='Seat' value='Seat' name='manufacturer' defaultChecked={selected == 'Seat'} />
                         Seat
                     </label>
                     <label htmlFor="Alfa Romeo">
-                        <input type='radio' id='Alfa Romeo' value='Alfa Romeo' name='manufacturer' />
+                        <input type='radio' id='Alfa Romeo' value='Alfa Romeo' name='manufacturer' defaultChecked={selected == 'Alfa Romeo'} />
                         Alfa Romeo
                     </label>
                     <label htmlFor="Kia">
-                        <input type='radio' id='Kia' value='VolksKiawagen' name='manufacturer' />
+                        <input type='radio' id='Kia' value='VolksKiawagen' name='manufacturer' defaultChecked={selected == 'Kia'} />
                         Kia
                     </label>
                 </div>

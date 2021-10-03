@@ -10,7 +10,7 @@ const Kupon = ({ applyCoupon }) => {
     }
 
     return (
-        <div>
+        <div className='coupon'>
 
             {
                 !kupon && <button className='btn' onClick={activateCouponInput}>Imam Kupon</button>

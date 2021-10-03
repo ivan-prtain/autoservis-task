@@ -2,12 +2,12 @@ import React from 'react'
 import ServiceDetail from './ServiceDetail'
 import './Steps.css'
 
-const Step4 = ({ visibility, carInfo, price, services, personalInfo, edit, nextStep, previousStep }) => {
+const Step4 = ({ carInfo, price, services, personalInfo, edit, nextStep, previousStep }) => {
 
 
 
     return (
-        <div style={{ display: visibility }}>
+        <div>
 
             <div>
                 Korak 4. Pregled i potvrda vašeg odabira
@@ -51,11 +51,11 @@ const Step4 = ({ visibility, carInfo, price, services, personalInfo, edit, nextS
 
             <div style={{ display: 'flex' }}>
                 <div className='sumup-container'>
-                    <div className='sumup-title'>KONTAKT PODACI
+                    <div id='sumup3' className='sumup-title'>KONTAKT PODACI
                         <button className='sumup-button btn' onClick={() => edit(3)}>Uredi</button>
                     </div>
                     <div>
-                        <span>Ime i prezime:</span> <span>{personalInfo.imeIprezime}</span>
+                        <span>Ime i prezime:</span> <span>{personalInfo.imeiprezime}</span>
                     </div>
                     <div>
                         <span>Email:</span> <span>{personalInfo.email}</span>
@@ -64,7 +64,7 @@ const Step4 = ({ visibility, carInfo, price, services, personalInfo, edit, nextS
 
                 </div>
 
-                <div className='sumup-container'>
+                <div id='sumup4' className='sumup-container'>
                     <div>
                         <span>Broj Telefona:</span> <span>{personalInfo.telbroj}</span>
                     </div>

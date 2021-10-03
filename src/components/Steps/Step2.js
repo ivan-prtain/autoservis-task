@@ -4,20 +4,13 @@ import { useState } from 'react';
 import ActivatedCoupon from './ActivatedCoupon';
 import './Steps.css'
 
-const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, saveCheckbox }) => {
+const Step2 = ({ nextStep, setTotalPrice, services, setServices, totalPrice, previousStep, checkboxes, saveCheckbox }) => {
 
-    const [couponApplied, setCouponApplied] = useState(false);
-    const [data, setData] = useState({
-        total: 0,
-        discountedTotal: 0,
-        discount: 0
-    })
-    const [services, setServices] = useState([])
 
     const [CouponCode] = useState('Tokić123')
 
     function calculate(e) {
-        let total = data.total;
+        let total = totalPrice.total;
         let service = e.target.name;
         let serviceId = e.target.id;
         let serviceCost = e.target.value;
@@ -26,9 +19,9 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
         setServices([...services, serviceDetails])
         console.log('stize servis')
         console.log(services);
-        if (couponApplied) {
-            let discountedTotal = data.discountedTotal;
-            let discount = data.discount;
+        if (totalPrice.couponApplied) {
+            let discountedTotal = totalPrice.discountedTotal;
+            let discount = totalPrice.discount;
             let itemValue = Number(e.target.value);
             let discountedItemValue = 0
             discountedItemValue = itemValue - (itemValue * 0.3);
@@ -39,10 +32,11 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
                 discountedTotal += discountedItemValue;
                 discount += itemValue * 0.3;
 
-                setData({
+                setTotalPrice({
                     total: total,
                     discountedTotal: discountedTotal,
-                    discount: discount
+                    discount: discount,
+                    couponApplied: true
                 })
             }
             else {
@@ -51,10 +45,11 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
                 discountedTotal -= discountedItemValue;
                 discount -= itemValue * 0.3;
 
-                setData({
+                setTotalPrice({
                     total: total,
                     discountedTotal: discountedTotal,
-                    discount: discount
+                    discount: discount,
+                    couponApplied: true
                 })
 
                 let updatedServices = services.filter(iteratedService => iteratedService[0] !== service)
@@ -65,14 +60,14 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
             if (e.target.checked === true) {
                 saveCheckbox(serviceId, true)
                 total += Number(e.target.value);
-                setData({
+                setTotalPrice({
                     total: total
                 })
             }
             else {
                 saveCheckbox(serviceId, false)
                 total -= Number(e.target.value);
-                setData({
+                setTotalPrice({
                     total: total
                 })
 
@@ -86,21 +81,21 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
 
     const applyCoupon = (e) => {
         e.preventDefault()
-        let total = data.total;
-        let discountedTotal = data.discountedTotal;
-        let discount = data.discount;
+        let total = totalPrice.total;
+        let discountedTotal = totalPrice.discountedTotal;
+        let discount = totalPrice.discount;
 
         let couponNumber = document.getElementById('couponNumber').value;
         if (couponNumber == CouponCode) {
             discountedTotal = total - (total * 0.3)
             discount = total * 0.3
 
-            setData({
+            setTotalPrice({
                 total: total,
                 discountedTotal: discountedTotal,
-                discount: discount
+                discount: discount,
+                couponApplied: true
             })
-            setCouponApplied(true);
         }
         else {
             alert('Nepostojeći kupon!')
@@ -108,8 +103,6 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
     }
 
     function nextStepAndsend() {
-        sendState(data);
-        sendState2(services);
         nextStep();
     }
 
@@ -121,7 +114,7 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
                 Korak 2. Odaberite jednu ili više usluga za koje ste
             </div>
 
-            <form style={{ height: '10rem' }} id='servicesForm' >
+            <form id='servicesForm' >
                 <input type='checkbox' checked={checkboxes.uljeifilter} className='regular-checkbox' id="uljeifilter" name="Ulje i filter" value="500" onChange={calculate} />
                 <label className='checkbox-label' htmlFor="uljeifilter">Zamjena ulja i filtera (500kn)</label>
 
@@ -142,12 +135,12 @@ const Step2 = ({ nextStep, sendState, sendState2, previousStep, checkboxes, save
 
             </form>
 
-            {!couponApplied && <Kupon applyCoupon={applyCoupon} />}
+            {!totalPrice.couponApplied && <Kupon applyCoupon={applyCoupon} />}
 
-            {couponApplied && <ActivatedCoupon total={data.total} discount={data.discount} />}
+            {totalPrice.couponApplied && <ActivatedCoupon total={totalPrice.total} discount={totalPrice.discount} />}
 
             <div>
-                <span>Ukupno</span> <span id='servicePrice'>{data.discountedTotal ? data.discountedTotal : data.total}</span> <span>Kn</span>
+                <span>Ukupno</span> <span id='servicePrice'>{totalPrice.discountedTotal ? totalPrice.discountedTotal : totalPrice.total}</span> <span>Kn</span>
             </div>
 
             <hr />

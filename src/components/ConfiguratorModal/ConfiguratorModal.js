@@ -14,7 +14,12 @@ const ConfiguratorModal = ({ functionality }) => {
 
     const [step, setStep] = useState(1);
     const [chosenCar, setChosenCar] = useState('');
-    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalPrice, setTotalPrice] = useState({
+        total: 0,
+        discountedTotal: 0,
+        discount: 0,
+        couponApplied: false
+    });
     const [services, setServices] = useState([]);
     const [checkboxes, setCheckboxes] = useState({
         uljeifilter: false,
@@ -25,7 +30,7 @@ const ConfiguratorModal = ({ functionality }) => {
         uljeKocnica: false
     })
     const [personalInfo, setPersonalInfo] = useState({
-        imeIprezime: '',
+        imeiprezime: '',
         email: '',
         telbroj: '',
         napomena: ''
@@ -133,21 +138,22 @@ const ConfiguratorModal = ({ functionality }) => {
 
                     {step == 2 && < Step2
                         nextStep={nextStep2}
-                        sendState={totalPrice => setTotalPrice(totalPrice)}
-                        sendState2={services => setServices(services)}
+                        totalPrice={totalPrice}
+                        setTotalPrice={setTotalPrice}
+                        services={services}
+                        setServices={setServices}
                         previousStep={previousStep2}
                         checkboxes={checkboxes}
                         saveCheckbox={saveCheckbox}
                         checkboxes={checkboxes}
                     />}
-                    < Step3
+                    {step == 3 && < Step3
                         nextStep={nextStep3}
                         previousStep={previousStep3}
-                        visibility={step == 3 ? '' : 'none'}
                         setPersonalInfo={setPersonalInfo}
                         personalInfo={personalInfo}
-                    />
-                    < Step4 visibility={step == 4 ? '' : 'none'}
+                    />}
+                    {step == 4 && < Step4 visibility={step == 4 ? '' : 'none'}
                         carInfo={chosenCar}
                         price={totalPrice}
                         services={services}
@@ -155,7 +161,7 @@ const ConfiguratorModal = ({ functionality }) => {
                         edit={step => setStep(step)}
                         nextStep={nextStep4}
                         previousStep={previousStep4}
-                    />
+                    />}
                     < Step5 visibility={step == 5 ? '' : 'none'}
                     />
 

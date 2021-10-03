@@ -29,7 +29,7 @@
 }
 
 .checkbox-label{
-    vertical-align: top;
+    vertical-align: super;
 }
 
 .sumup-container{
@@ -43,7 +43,7 @@
 }
 
 .sumup-button{
-    margin-left: 15px;
+    margin-left: 20px !important;
 }
 
 .sumup-title{
@@ -67,3 +67,123 @@
 	font-size: 15px;
 	font-family: inherit;
   }
+
+  .radio-form{
+	margin-top: 2rem;
+    text-align: left;
+  }
+
+  .radio-elements > *{
+	  margin-left:10px
+  }
+
+  .step-title{
+	  text-align: left;
+	  margin-left: 16px;
+	  font-weight: 500;
+  }
+
+  #servicesForm{
+	  display: flex;
+	  margin-top:35px;
+	  margin-bottom:2rem;
+	  text-align: left;
+  }
+
+  .service-box1{
+	  flex: 1;
+  }
+
+  .service-box2{
+	flex: 1;
+}
+
+.service-box3{
+	flex: 1;
+}
+
+  .coupon{
+	  text-align: right;
+  }
+
+  .coupon-info{
+	  text-align: right;
+  }
+
+  .coupon-msg{
+	  color:green;
+  }
+
+  #services-container > *{
+	  margin-bottom: 5px;
+  }
+
+  #sumup3 > *{
+	margin-bottom: 10px;
+}
+
+#personalData{
+	display:flex;
+	margin-top:30px;
+}
+
+#personalData >*{
+	margin-bottom: 10px;
+}
+
+.personalData-box1{
+	flex: 1;
+	text-align: right;
+}
+
+.personalData-box2{
+	flex: 1;
+	text-align: left;
+	margin-left: 20px;
+}
+
+.personalData-box1 >*{
+	margin-bottom: 10px;
+}
+
+.personalData-box2 >*{
+	margin-bottom: 10px;
+}
+
+#imeiprezime{
+	width:300px
+}
+
+#telbroj{
+	width: 300px;
+}
+
+#email{
+	width: 300px;
+}
+
+#napomena{
+	width: 300px;
+	height: 80px;
+}
+
+.review-message{
+	font-size: small;
+}
+
+.sumup-section{
+	display:flex;
+}
+
+.sumup-data{
+	margin-bottom: 10px;
+}
+
+#sumup4{
+	margin-top: 53px;
+}
+
+
+
+
+

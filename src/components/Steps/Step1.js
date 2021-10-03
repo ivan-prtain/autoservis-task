@@ -3,43 +3,72 @@ import Button from '../Button'
 import './Steps.css'
 
 
-const Step1 = ({ functionality, visibility, sendState }) => {
-
-
-
+const Step1 = ({ functionality, selected }) => {
 
     return (
-        <div style={{ display: visibility }}>
-            <div>
+        <div>
+            <div className='step-title'>
                 Korak 1. Odaberite proizvođača vašeg vozila
             </div>
-            <form style={{ height: '10rem' }} name='radioForm'>
-                <input type='radio' id='Peugeot' value='Peugeot' name='manufacturer' />
-                <label htmlFor="Peugeot">Peugeot</label>
-                <input type='radio' id='Volkswagen' value='Volkswagen' name='manufacturer' />
-                <label htmlFor="Volkswagen">Volkswagen</label>
-                <input type='radio' id='Citroen' value='Citroen' name='manufacturer' />
-                <label htmlFor="Citroen">Citroen</label>
-                <input type='radio' id='Audi' value='Audi' name='manufacturer' />
-                <label htmlFor="Audi">Audi</label>
-                <input type='radio' id='BMW' value='BMW' name='manufacturer' />
-                <label htmlFor="BMW">BMW</label>
-                <input type='radio' id='Seat' value='Seat' name='manufacturer' />
-                <label htmlFor="Seat">Seat</label>
-                <input type='radio' id='Alfa Romeo' value='Alfa Romeo' name='manufacturer' />
-                <label htmlFor="Alfa Romeo">Alfa Romeo</label>
-                <input type='radio' id='Kia' value='VolksKiawagen' name='manufacturer' />
-                <label htmlFor="Kia">Kia</label>
-                <input type='radio' id='Hyundai' value='Hyundai' name='manufacturer' />
-                <label htmlFor="Hyundai">Hyundai</label>
-                <input type='radio' id='Honda' value='Honda' name='manufacturer' />
-                <label htmlFor="Honda">Honda</label>
-                <input type='radio' id='Toyota' value='Toyota' name='manufacturer' />
-                <label htmlFor="Toyota">Toyota</label>
+            <form className='radio-form' name='radioForm'>
+                <div className='radio-elements'>
+
+                    <label htmlFor="Peugeot">
+                        <input type='radio' id='Peugeot' value='Peugeot' name='manufacturer' defaultChecked={selected == 'Peugeot'} />
+                        Peugeot
+                    </label>
+                    <label htmlFor="Volkswagen">
+                        <input type='radio' id='Volkswagen' value='Volkswagen' name='manufacturer' defaultChecked={selected == 'Volkswagen'} />
+                        Volkswagen
+                    </label>
+                    <label htmlFor="Citroen">
+                        <input type='radio' id='Citroen' value='Citroen' name='manufacturer' defaultChecked={selected == 'Citroen'} />
+                        Citroen
+                    </label>
+                    <label htmlFor="Audi">
+                        <input type='radio' id='Audi' value='Audi' name='manufacturer' defaultChecked={selected == 'Audi'} />
+                        Audi
+                    </label>
+                    <label htmlFor="BMW">
+                        <input type='radio' id='BMW' value='BMW' name='manufacturer' defaultChecked={selected == 'BMW'} />
+                        BMW
+                    </label>
+                    <label htmlFor="Seat">
+                        <input type='radio' id='Seat' value='Seat' name='manufacturer' defaultChecked={selected == 'Seat'} />
+                        Seat
+                    </label>
+                    <label htmlFor="Alfa Romeo">
+                        <input type='radio' id='Alfa Romeo' value='Alfa Romeo' name='manufacturer' defaultChecked={selected == 'Alfa Romeo'} />
+                        Alfa Romeo
+                    </label>
+                    <label htmlFor="Kia">
+                        <input type='radio' id='Kia' value='VolksKiawagen' name='manufacturer' defaultChecked={selected == 'Kia'} />
+                        Kia
+                    </label>
+                </div>
+
+                <div className='radio-elements'>
+
+
+                    <label htmlFor="Hyundai">
+                        <input type='radio' id='Hyundai' value='Hyundai' name='manufacturer' />
+                        Hyundai
+                    </label>
+                    <label htmlFor="Honda">
+                        <input type='radio' id='Honda' value='Honda' name='manufacturer' />
+                        Honda
+                    </label>
+                    <label htmlFor="Toyota">
+                        <input type='radio' id='Toyota' value='Toyota' name='manufacturer' />
+                        Toyota
+                    </label>
+                </div>
+
+
             </form>
             <hr />
 
-            <Button text='Dalje' functionality={functionality} />
+            <Button cssClass='btn' text='Dalje' functionality={functionality} />
 
         </div>
     )

@@ -54,8 +54,8 @@ const ConfiguratorModal = ({ functionality }) => {
 
     /**
      * saveCheckbox
-     * @param {*} id 
-     * @param {*} condition 
+     * @param {string} id 
+     * @param {bool} condition 
      */
     const saveCheckbox = (id, condition) => {
         let checkboxesCopy = checkboxes;
@@ -159,7 +159,7 @@ const ConfiguratorModal = ({ functionality }) => {
     return (
         <div className='modal-background'>
             <div className='modal-container'>
-                <button className='close' onClick={functionality}>X</button>
+                <button className='btn close' onClick={functionality}>X</button>
                 <h3 className='title'>Konfigurator servisa</h3>
                 {step == 1 && < Step1
                     functionality={nextStep1}
